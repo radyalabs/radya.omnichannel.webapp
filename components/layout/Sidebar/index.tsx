@@ -8,7 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
 import mark from '@/assets/brand_mark_primary.svg';
-import logo from '@/assets/brand_primary.png';
 import Typography from '@/components/base/Typography';
 import { APP_TITLE } from '@/constants/config';
 
