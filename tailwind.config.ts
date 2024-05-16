@@ -4,11 +4,11 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
   content: [
-    './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/context/**/*.{js,ts,jsx,tsx}',
-    './src/hooks/**/*.{js,ts,jsx,tsx}',
-    './src/pages/**/*.{js,ts,jsx,tsx}',
-    './src/views/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './context/**/*.{js,ts,jsx,tsx}',
+    './hooks/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './views/**/*.{js,ts,jsx,tsx}',
   ],
   corePlugins: {
     preflight: false,

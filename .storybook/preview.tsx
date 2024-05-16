@@ -1,12 +1,11 @@
 import type { Decorator, Preview } from '@storybook/react';
 import { withThemeByClassName, withThemeFromJSXProvider } from '@storybook/addon-themes';
 
-import '../src/styles/globals.css';
+import '@/styles/globals.scss';
 import { ThemeProvider } from '@mui/material';
-import { Quicksand, Rubik } from 'next/font/google';
+import { Plus_Jakarta_Sans, Rubik } from 'next/font/google';
 
-import { MUI_THEME } from '@/constants/config';
-import { createTheme } from '@mui/material/styles';
+import theme from '@/lib/theme';
 
 const preview: Preview = {
   parameters: {
@@ -27,19 +26,19 @@ const rubik = Rubik({
   variable: '--font-rubik',
 });
 
-const quicksand = Quicksand({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
-  variable: '--font-quicksand',
+  variable: '--font-jakarta',
 });
 
 // @ts-ignore
 export const decorators: Decorator = [
   withThemeFromJSXProvider({
     themes: {
-      light: createTheme(MUI_THEME(null, rubik)),
-      dark: createTheme(MUI_THEME(null, rubik)),
+      light: theme,
+      dark: theme,
     },
     defaultTheme: 'light',
     Provider: ThemeProvider,
@@ -54,7 +53,7 @@ export const decorators: Decorator = [
   }),
 // @ts-ignore
   (Story) => (
-    <main className={`${rubik.variable} ${quicksand.variable} `}>
+    <main className={`${rubik.variable} ${plusJakartaSans.variable} `} id="__next">
       <Story />
     </main>
   ),
