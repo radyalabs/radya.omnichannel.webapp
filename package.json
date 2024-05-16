@@ -11,6 +11,7 @@
     "prepare": "husky install .husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "icons:clean": "rimraf components/icons",
     "icons:build": "svgr --typescript -d ./src/components/icons ./src/assets/icons --config-file ./svgr-config.json --template ./svg-template.js && pnpm lint:icons",
     "icons:create": "pnpm icons:clean && pnpm icons:build"
   },
