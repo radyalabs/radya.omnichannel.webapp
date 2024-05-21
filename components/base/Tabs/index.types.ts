@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
 export interface TabPanelProps {
   children: ReactNode;
@@ -8,9 +8,13 @@ export interface TabPanelProps {
 
 export interface TabsProps {
   children: ReactNode;
+  className?: string;
   value: number;
   labels: string[];
+  icons?: ReactElement[];
+  selectedIcons?: ReactElement[];
   counters: number[];
   onChange: (tabIndex: number) => void;
   hrefs?: string[];
+  variant?: 'standard' | 'fullWidth' | 'scrollable';
 }

@@ -10,7 +10,9 @@
     "#FFFFFF": "{fill}",
     "black": "{fill}",
     "#121212": "{fill}",
-    "#000": "{fill}"
+    "#000": "{fill}",
+    "#fff": "{fill}",
+    "none": "none"
   },
   "svgProps": {
     "fill": "{fill || '#000000'}",

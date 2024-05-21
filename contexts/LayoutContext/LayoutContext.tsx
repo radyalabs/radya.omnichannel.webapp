@@ -11,16 +11,31 @@ const LayoutContext = createContext<LayoutContextTypes | undefined>(undefined);
 const LayoutProvider = ({ children }: LayoutProviderProps) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
 
+  const showSidebar = useCallback(() => {
+    setIsCollapsed(false);
+  }, []);
+
+  const collapseSidebar = useCallback(() => {
+    setIsCollapsed(true);
+  }, []);
+
   const toggleCollapsed = useCallback(() => {
     setIsCollapsed(!isCollapsed);
   }, [isCollapsed]);
 
   const sidebarProviderValue = useMemo(() => (
     {
+      collapseSidebar,
       isCollapsed,
+      showSidebar,
       toggleCollapsed,
     }
-  ), [isCollapsed, toggleCollapsed]);
+  ), [
+    collapseSidebar,
+    isCollapsed,
+    showSidebar,
+    toggleCollapsed,
+  ]);
 
   return (
     <LayoutContext.Provider value={sidebarProviderValue}>

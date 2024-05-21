@@ -19,7 +19,7 @@ import MUI_THEME from '@/lib/theme';
 import type { BaseError } from '@/types/responses';
 import { createQueryParams } from '@/utils';
 
-import '@/styles/globals.css';
+import '@/styles/globals.scss';
 
 const rubik = Rubik({
   subsets: ['latin'],

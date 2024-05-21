@@ -11,16 +11,22 @@ import type { TabPanelProps, TabsProps } from './index.types';
 const Tabs = (props: Partial<TabsProps>) => {
   const {
     children,
-    labels,
+    className,
     counters,
     hrefs = [],
+    icons = [],
+    labels,
+    selectedIcons = [],
     value: tabValue,
+    variant = 'standard',
   } = props;
   const { value = 0, handleChange } = useTabs(props);
   return (
     <Box>
       <MUITabs
+        className={className}
         value={tabValue !== undefined ? tabValue : value}
+        variant={variant}
         onChange={handleChange}
       >
         {(labels || []).map((label, i) => {
@@ -29,11 +35,12 @@ const Tabs = (props: Partial<TabsProps>) => {
               (
                 <Tab
                   classes={{
-                    root: 'normal-case min-w-[150px] p-1',
+                    root: 'normal-case p-1',
                   }}
+                  icon={tabValue === i ? (selectedIcons[i] || icons[i]) : icons[i]}
                   sx={{ opacity: 1 }}
                   label={(
-                    <p>
+                    <p className={icons.length ? 'm-0' : ''}>
                       <span>{label}</span>
                       {counters && (
                         <span

@@ -1,0 +1,56 @@
+.chip {
+  @apply h-6 [&>span]:px-2 #{!important};
+  &.filled {
+    &.primary {
+      @apply bg-primary-50 text-primary-500;
+    }
+    &.secondary {
+      @apply bg-secondary-50 text-secondary-500;
+    }
+    &.danger {
+      @apply bg-danger-50 text-danger-500;
+    }
+    &.success {
+      @apply bg-success-50 text-success-500;
+    }
+    &.warning {
+      @apply bg-warning-50 text-warning-500;
+    }
+  }
+  &.selected {
+    &.outlined {
+      &.primary {
+        @apply bg-primary-100;
+      }
+      &.secondary {
+        @apply bg-secondary-100;
+      }
+      &.danger {
+        @apply bg-danger-100;
+      }
+      &.success {
+        @apply bg-success-100;
+      }
+      &.warning {
+        @apply bg-warning-100;
+      }
+    }
+    &.filled {
+      &.primary {
+        @apply bg-primary-800;
+      }
+      &.secondary {
+        @apply bg-secondary-800;
+      }
+      &.danger {
+        @apply bg-danger-800 #{!important};
+      }
+      &.success {
+        @apply bg-success-800;
+      }
+      &.warning {
+        @apply bg-warning-800;
+      }
+    }
+  }
+}

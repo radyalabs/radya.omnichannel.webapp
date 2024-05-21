@@ -18,7 +18,8 @@ const Sidebar = () => {
   const {
     isCollapsed,
     menus,
-    toggleCollapsed,
+    collapseSidebar,
+    showSidebar,
   } = useSidebar();
   return (
     <aside
@@ -27,8 +28,8 @@ const Sidebar = () => {
     >
       <div
         className={`overflow-y-auto bg-primary-500 h-full ${!isCollapsed ? 'px-2' : ''}`}
-        onMouseEnter={toggleCollapsed}
-        onMouseLeave={toggleCollapsed}
+        onMouseEnter={showSidebar}
+        onMouseLeave={collapseSidebar}
       >
         <div className={`flex px-2 py-5 items-center ${!isCollapsed ? 'px-4 justify-between' : 'justify-center'}`}>
           <Image
@@ -52,6 +53,7 @@ const Sidebar = () => {
         <List
           sx={{ width: '100%' }}
           component="nav"
+          className="py-0"
         >
           {menus.map((menu) => (
             !menu.subMenu ? (

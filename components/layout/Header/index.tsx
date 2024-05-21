@@ -25,7 +25,7 @@ const Header = () => {
   } = profile || {};
 
   return (
-    <AppBar className="w-full bg-n-1 py-3 shadow fixed z-30">
+    <AppBar className="w-full bg-n-1 py-2 shadow fixed z-30">
       <Toolbar className="transition-width transition-slowest ease px-7 [&>*]:text-n-13 ml-24 gap-2">
         <Typography
           variant="title"
