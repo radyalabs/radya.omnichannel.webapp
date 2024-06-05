@@ -7,8 +7,8 @@ import Typography from '@/components/base/Typography';
 
 const ChatEmpty = () => (
   <div className="flex flex-col items-center justify-center h-full">
-    <Image src={emptyChat} alt="" />
-    <Typography>Please select a conversation to start messaging</Typography>
+    <Image src={emptyChat} alt="robot with phone in chat on background" />
+    <Typography className="text-xl font-medium text-n-9">Please select a conversation to start messaging</Typography>
   </div>
 );
 

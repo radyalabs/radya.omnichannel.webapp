@@ -31,7 +31,7 @@ const Header = () => {
           variant="title"
           as="span"
           align="left"
-          className="font-semibold grow"
+          className="font-bold grow"
         >
           {APP_TITLE}
         </Typography>

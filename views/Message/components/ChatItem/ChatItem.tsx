@@ -25,13 +25,13 @@ const ChatItem = (props: ChatItemProps) => {
           {name}
         </Typography>
         <Typography
-          className="text-n-8 max-w-full text-ellipsis overflow-hidden text-nowrap"
+          className="text-n-7 max-w-full text-ellipsis overflow-hidden text-nowrap"
         >
           {placeholder}
         </Typography>
       </div>
       <div className="flex flex-col justify-between items-center min-h-full">
-        <Typography className="text-n-8" size="small">
+        <Typography className="text-n-7" size="small">
           Today 08.30
         </Typography>
         { variant === ChatItemType.Served && (<Chip label="Served" variant="filled" color="primary" />)}

@@ -119,6 +119,11 @@ export default {
         12: '#252525',
         13: '#121212',
       },
+      chatRoom: {
+        date: '#E8EAF0',
+        user: '#54C4F9',
+        admin: '#666E7F',
+      },
     },
     fontFamily: {
       sans: ['var(--font-rubik)', ...defaultTheme.fontFamily.sans],
