@@ -39,22 +39,121 @@ const ChatListPanel = () => {
         variant="fullWidth"
         onChange={handleChangeTab}
       />
-      <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-      </div>
+      {tabValue === 0 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Krisna Rusdiono"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+          <ChatItem
+            name="Arrizky Hasya Pratama"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="resolved"
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+        </div>
+      )}
+      {tabValue === 1 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+        </div>
+      )}
+      {tabValue === 2 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            name="Krisna Rusdiono"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+        </div>
+      )}
+      {tabValue === 3 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            name="Arrizky Hasya Pratama"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="resolved"
+          />
+          <ChatItem
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="resolved"
+          />
+        </div>
+      )}
     </div>
   );
 };
