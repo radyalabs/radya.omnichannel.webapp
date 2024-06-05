@@ -11,6 +11,7 @@ interface ChatItemProps {
    * Chat Placeholder
    */
   placeholder: string;
+  onClick: () => void;
 }
 
 export default ChatItemProps;

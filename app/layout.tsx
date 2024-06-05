@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Quicksand, Rubik } from 'next/font/google';
+import { Poppins, Quicksand } from 'next/font/google';
 
 import { ThemeProvider } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
@@ -10,11 +10,11 @@ import theme from '@/lib/theme';
 
 import '@/styles/globals.scss';
 
-const rubik = Rubik({
+const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
-  variable: '--font-rubik',
+  variable: '--font-poppins',
 });
 
 const quicksand = Quicksand({
@@ -39,7 +39,7 @@ export const viewport: Viewport = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">
-    <body id="__next" className={`${rubik.variable} ${quicksand.variable}`}>
+    <body id="__next" className={`${poppins.variable} ${quicksand.variable}`}>
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
           <ContextProvider>{children}</ContextProvider>

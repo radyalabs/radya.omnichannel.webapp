@@ -1,1 +1,6 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.667 16h.012m5.328 0h.011m5.304 0h.011" stroke="#fff" stroke-width="2.667" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 29.333c7.364 0 13.333-5.969 13.333-13.333S23.364 2.667 16 2.667 2.667 8.636 2.667 16 8.636 29.333 16 29.333Z" stroke="#fff" stroke-width="2"/></svg>
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group">
+<path id="Vector" d="M7 11H7.009M11.005 11H11.013M14.991 11H15" stroke="#00A7F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z" stroke="#00A7F6" stroke-width="1.5"/>
+</g>
+</svg>

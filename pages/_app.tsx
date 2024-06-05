@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import { Quicksand, Rubik } from 'next/font/google';
+import { Poppins, Quicksand } from 'next/font/google';
 
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -21,11 +21,11 @@ import { createQueryParams } from '@/utils';
 
 import '@/styles/globals.scss';
 
-const rubik = Rubik({
+const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
-  variable: '--font-rubik',
+  variable: '--font-poppins',
 });
 
 const quicksand = Quicksand({
@@ -57,7 +57,7 @@ const App = ({
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <main className={`${rubik.variable} ${quicksand.variable} `}>
+      <main className={`${poppins.variable} ${quicksand.variable} `}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={MUI_THEME}>
             <LocalizationProvider

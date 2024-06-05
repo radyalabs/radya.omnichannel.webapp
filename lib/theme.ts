@@ -1,6 +1,6 @@
 'use client';
 
-import { Rubik } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 
 import { createTheme } from '@mui/material/styles';
 import resolveConfig from 'tailwindcss/resolveConfig';
@@ -19,11 +19,11 @@ declare module '@mui/material/styles' {
   }
 }
 
-const rubik = Rubik({
+const poppins = Poppins({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
-  variable: '--font-rubik',
+  variable: '--font-poppins',
 });
 
 const { theme: twTheme } = resolveConfig(tailwindConfig);
@@ -36,17 +36,17 @@ const theme = createTheme({
   components: {
     MuiPopover: {
       defaultProps: {
-        style: { fontFamily: rubik.style.fontFamily },
+        style: { fontFamily: poppins.style.fontFamily },
       },
     },
     MuiPopper: {
       defaultProps: {
-        style: { fontFamily: rubik.style.fontFamily },
+        style: { fontFamily: poppins.style.fontFamily },
       },
     },
     MuiModal: {
       defaultProps: {
-        style: { fontFamily: rubik.style.fontFamily },
+        style: { fontFamily: poppins.style.fontFamily },
       },
     },
     MuiAlert: {
@@ -65,7 +65,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: rubik.style.fontFamily,
+    fontFamily: poppins.style.fontFamily,
     button: {
       textTransform: 'none',
     },
