@@ -141,6 +141,11 @@ export default {
       '5xl': '2.441rem',
     },
     extend: {
+      borderWidth: {
+        0: '0px',
+        6: '6px',
+        8: '8px',
+      },
       spacing: {
         128: '32rem',
         144: '36rem',

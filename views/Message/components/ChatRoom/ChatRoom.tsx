@@ -10,6 +10,7 @@ import Button from '@/components/base/Button';
 import Textarea from '@/components/base/Textarea';
 import Typography from '@/components/base/Typography';
 import Avatar from '@/components/ui/Avatar';
+import ChatBubble from '@/views/Message/components/ChatBubble/ChatBubble';
 
 const ChatRoom = () => (
   <div className="flex flex-col h-[calc(100vh-5rem)]">
@@ -33,7 +34,6 @@ const ChatRoom = () => (
           </Button>
         </div>
       </div>
-
     </div>
 
     {/*  Chat Room Content */}
@@ -45,185 +45,9 @@ const ChatRoom = () => (
         </div>
       </div>
       {/*  User Bubble */}
-      <div className="flex w-full mt-3.5">
-        <div className="flex flex-1">
-          <div className="pt-5">
-            <Avatar label="Hasbi Ashshidiq" height={35} width={35} />
-          </div>
-          <div className="flex flex-col ml-4">
-            <div className="flex gap-2.5">
-              <Typography variant="body" size="medium" className="text-n-10 font-semibold">Hasbi Ashshidiq</Typography>
-              <Typography variant="body" size="medium" className="text-n-8 font-medium">14:50</Typography>
-            </div>
-            <div
-              className="relative flex bg-chatRoom-user px-4 py-2.5 rounded-xl mt-1 before:content-[''] before:absolute before:left-[-8px] before:w-0 after:h-0
-        before:border-t-[6px] before:border-t-transparent before:border-solid
-        before:border-b-[6px] before:border-b-transparent
-        before:border-r-[8px] before:border-r-chatRoom-user
-        before:border-l-[0px]"
-            >
-              <Typography size="medium" className="text-n-1">
-                Hai admin ingin bertanya terkait dengan fitur
-              </Typography>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-1 justify-end" />
-      </div>
-      <div className="flex w-full mt-3.5">
-        <div className="flex flex-1 items-center" />
-        <div className="flex flex-1 justify-end">
-          <div className="flex flex-col mr-4">
-            <div className="flex gap-2.5 justify-end">
-              <Typography variant="body" size="medium" className="text-n-8 font-medium">14:50</Typography>
-              <Typography variant="body" size="medium" className="text-n-10 font-semibold">Admin</Typography>
-            </div>
-            <div
-              className="relative flex bg-chatRoom-admin px-4 py-2.5 rounded-xl mt-1 before:content-[''] before:absolute before:right-[-8px] before:w-0 after:h-0
-        before:border-t-[6px] before:border-t-transparent before:border-solid
-        before:border-b-[6px] before:border-b-transparent
-        before:border-l-[8px] before:border-l-chatRoom-admin
-        before:border-r-[0px]"
-            >
-              <Typography size="medium" className="text-n-1">
-                {/* eslint-disable-next-line max-len */}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A autem cumque ducimus earum libero maiores
-              </Typography>
-            </div>
-          </div>
-          <div className="pt-5">
-            <Avatar label="Hasbi Ashshidiq" height={35} width={35} className="bg-n-3" />
-          </div>
-        </div>
-      </div>
-      <div className="flex w-full mt-3.5">
-        <div className="flex flex-1 ">
-          <div className="pt-5">
-            <Avatar label="Hasbi Ashshidiq" height={35} width={35} />
-          </div>
-          <div className="flex flex-col ml-4">
-            <div className="flex gap-2.5">
-              <Typography variant="body" size="medium" className="text-n-10 font-semibold">Hasbi Ashshidiq</Typography>
-              <Typography variant="body" size="medium" className="text-n-8 font-medium">14:50</Typography>
-            </div>
-            <div
-              className="relative flex bg-chatRoom-user px-4 py-2.5 rounded-xl mt-1 before:content-[''] before:absolute before:left-[-8px] before:w-0 after:h-0
-        before:border-t-[6px] before:border-t-transparent before:border-solid
-        before:border-b-[6px] before:border-b-transparent
-        before:border-r-[8px] before:border-r-chatRoom-user
-        before:border-l-[0px]"
-            >
-              <Typography size="medium" className="text-n-1">
-                {/* eslint-disable-next-line max-len */}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto consequatur deleniti
-                dignissimos dolorum eaque eveniet fuga ipsa ipsam maxime,
-                modi nam necessitatibus nemo non nostrum
-                possimus praesentium qui quo reiciendis repellat reprehenderit,
-                sed tempore temporibus velit veniam
-                voluptate voluptatem.
-              </Typography>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-1 justify-end" />
-      </div>
-      <div className="flex w-full mt-3.5">
-        <div className="flex flex-1 ">
-          <div className="pt-5">
-            <Avatar label="Hasbi Ashshidiq" height={35} width={35} />
-          </div>
-          <div className="flex flex-col ml-4">
-            <div className="flex gap-2.5">
-              <Typography variant="body" size="medium" className="text-n-10 font-semibold">Hasbi Ashshidiq</Typography>
-              <Typography variant="body" size="medium" className="text-n-8 font-medium">14:50</Typography>
-            </div>
-            <div
-              className="relative flex bg-chatRoom-user px-4 py-2.5 rounded-xl mt-1 before:content-[''] before:absolute before:left-[-8px] before:w-0 after:h-0
-        before:border-t-[6px] before:border-t-transparent before:border-solid
-        before:border-b-[6px] before:border-b-transparent
-        before:border-r-[8px] before:border-r-chatRoom-user
-        before:border-l-[0px]"
-            >
-              <Typography size="medium" className="text-n-1">
-                {/* eslint-disable-next-line max-len */}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto consequatur deleniti
-                dignissimos dolorum eaque eveniet fuga ipsa ipsam maxime,
-                modi nam necessitatibus nemo non nostrum
-                possimus praesentium qui quo reiciendis repellat reprehenderit,
-                sed tempore temporibus velit veniam
-                voluptate voluptatem.
-              </Typography>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-1 justify-end" />
-      </div>
-      <div className="flex w-full mt-3.5">
-        <div className="flex flex-1 ">
-          <div className="pt-5">
-            <Avatar label="Hasbi Ashshidiq" height={35} width={35} />
-          </div>
-          <div className="flex flex-col ml-4">
-            <div className="flex gap-2.5">
-              <Typography variant="body" size="medium" className="text-n-10 font-semibold">Hasbi Ashshidiq</Typography>
-              <Typography variant="body" size="medium" className="text-n-8 font-medium">14:50</Typography>
-            </div>
-            <div
-              className="relative flex bg-chatRoom-user px-4 py-2.5 rounded-xl mt-1 before:content-[''] before:absolute before:left-[-8px] before:w-0 after:h-0
-        before:border-t-[6px] before:border-t-transparent before:border-solid
-        before:border-b-[6px] before:border-b-transparent
-        before:border-r-[8px] before:border-r-chatRoom-user
-        before:border-l-[0px]"
-            >
-              <Typography size="medium" className="text-n-1">
-                {/* eslint-disable-next-line max-len */}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto consequatur deleniti
-                dignissimos dolorum eaque eveniet fuga ipsa ipsam maxime,
-                modi nam necessitatibus nemo non nostrum
-                possimus praesentium qui quo reiciendis repellat reprehenderit,
-                sed tempore temporibus velit veniam
-                voluptate voluptatem.
-              </Typography>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-1 justify-end" />
-      </div>
-      <div className="flex w-full mt-3.5">
-        <div className="flex flex-1 ">
-          <div className="pt-5">
-            <Avatar label="Hasbi Ashshidiq" height={35} width={35} />
-          </div>
-          <div className="flex flex-col ml-4">
-            <div className="flex gap-2.5">
-              <Typography variant="body" size="medium" className="text-n-10 font-semibold">Hasbi Ashshidiq</Typography>
-              <Typography variant="body" size="medium" className="text-n-8 font-medium">14:50</Typography>
-            </div>
-            <div
-              className="relative flex bg-chatRoom-user px-4 py-2.5 rounded-xl mt-1 before:content-[''] before:absolute before:left-[-8px] before:w-0 after:h-0
-        before:border-t-[6px] before:border-t-transparent before:border-solid
-        before:border-b-[6px] before:border-b-transparent
-        before:border-r-[8px] before:border-r-chatRoom-user
-        before:border-l-[0px]"
-            >
-              <Typography size="medium" className="text-n-1">
-                {/* eslint-disable-next-line max-len */}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquam architecto consequatur deleniti
-                dignissimos dolorum eaque eveniet fuga ipsa ipsam maxime,
-                modi nam necessitatibus nemo non nostrum
-                possimus praesentium qui quo reiciendis repellat reprehenderit,
-                sed tempore temporibus velit veniam
-                voluptate voluptatem.
-              </Typography>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-1 justify-end" />
-      </div>
+      <ChatBubble name="Hasbi Ashshidiq" message="Hai admin ingin bertanya terkait dengan fitur" type="receiver" timestamp="14:50" />
+      <ChatBubble name="Hasbi Ashshidiq" message="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, iste!" type="sender" timestamp="14:51" />
+      <ChatBubble name="Hasbi Ashshidiq" message=" Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto consequatur deleniti" type="receiver" timestamp="14:52" />
     </div>
 
     <div className="px-7 pb-8 pt-5">
