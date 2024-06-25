@@ -119,6 +119,11 @@ export default {
         12: '#252525',
         13: '#121212',
       },
+      chatRoom: {
+        date: '#E8EAF0',
+        user: '#54C4F9',
+        admin: '#666E7F',
+      },
     },
     fontFamily: {
       sans: ['var(--font-rubik)', ...defaultTheme.fontFamily.sans],
@@ -136,6 +141,11 @@ export default {
       '5xl': '2.441rem',
     },
     extend: {
+      borderWidth: {
+        0: '0px',
+        6: '6px',
+        8: '8px',
+      },
       spacing: {
         128: '32rem',
         144: '36rem',

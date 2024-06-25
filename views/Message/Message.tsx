@@ -1,21 +1,23 @@
 'use client';
 
-import Image from 'next/image';
+import { useState } from 'react';
 
-import emptyChat from '@/assets/Chat bot-pana 1.svg';
-import Typography from '@/components/base/Typography';
+import ChatEmpty from '@/views/Message/components/ChatEmpty/ChatEmpty';
 import ChatListPanel from '@/views/Message/components/ChatListPanel/ChatListPanel';
+import ChatRoom from '@/views/Message/components/ChatRoom/ChatRoom';
 
-const Message = () => (
-  <div className="flex bg-n-1 hide-overflow">
-    <ChatListPanel />
-    <div className="grow">
-      <div className="flex flex-col items-center justify-center h-full">
-        <Image src={emptyChat} alt="" />
-        <Typography>Please select a conversation to start messaging</Typography>
+const Message = () => {
+  const [chatView, setChatView] = useState<number>(0);
+
+  return (
+    <div className="flex bg-n-1 hide-overflow">
+      <ChatListPanel setChatView={setChatView} />
+      <div className="grow">
+        {chatView === 0 && <ChatEmpty />}
+        {chatView === 1 && <ChatRoom />}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Message;

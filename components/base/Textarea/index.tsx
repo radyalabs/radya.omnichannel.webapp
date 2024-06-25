@@ -68,7 +68,7 @@ const Textarea = forwardRef(
             value={label}
           />
         )}
-        <div className={`${containerStyle.join(' ')} ${containerClass} mt-3.5`}>
+        <div className={`${containerStyle.join(' ')} ${containerClass}`}>
           <TextareaAutosize
             className={`${textFieldStyle.join(' ')} ${inputClass}`}
             placeholder={placeholder}

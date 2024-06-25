@@ -7,11 +7,17 @@ import {
   SolarUsersGroupTwoRoundedBold,
   SolarUserSpeakFill,
 } from '@/components/icons';
+import { noop } from '@/utils';
 
 import ChatItem from '../ChatItem';
 import ChatListHeader from '../ChatListHeader';
 
-const ChatListPanel = () => {
+interface ChatListPanelProps {
+  setChatView?: (value: (((prevState: number) => number) | number)) => void;
+}
+
+const ChatListPanel = (props: ChatListPanelProps) => {
+  const { setChatView = noop } = props;
   const [tabValue, setTabValue] = useState(0);
   const handleChangeTab = (value: number) => {
     setTabValue(value);
@@ -39,22 +45,144 @@ const ChatListPanel = () => {
         variant="fullWidth"
         onChange={handleChangeTab}
       />
-      <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-        <ChatItem />
-      </div>
+      {tabValue === 0 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Krisna Rusdiono"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Arrizky Hasya Pratama"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="resolved"
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+        </div>
+      )}
+      {tabValue === 1 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          />
+        </div>
+      )}
+      {tabValue === 2 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Krisna Rusdiono"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="served"
+          />
+        </div>
+      )}
+      {tabValue === 3 && (
+        <div className="border-0 border-y border-solid border-n-5 grow overflow-y-scroll flex flex-col">
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Arrizky Hasya Pratama"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="resolved"
+          />
+          <ChatItem
+            onClick={() => setChatView(1)}
+            name="Hasbi Ashshidiq"
+            placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            variant="resolved"
+          />
+        </div>
+      )}
     </div>
   );
 };
