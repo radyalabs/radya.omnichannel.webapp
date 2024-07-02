@@ -11,4 +11,8 @@ export const ENDPOINT = {
     USERS_BY_ID: (id: string) => `user-management/users/${id}`,
     SCOPES: '/user-management/users/application-scopes',
   },
+  MESSAGE: {
+    CONVERSATION: '/conversation',
+    CONVERSATION_MESSAGE: (conversationId: string) => `/conversation/${conversationId}/messages`,
+  },
 } as const;

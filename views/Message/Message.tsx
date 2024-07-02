@@ -1,20 +1,29 @@
 'use client';
 
-import { useState } from 'react';
-
-import ChatEmpty from '@/views/Message/components/ChatEmpty/ChatEmpty';
 import ChatListPanel from '@/views/Message/components/ChatListPanel/ChatListPanel';
 import ChatRoom from '@/views/Message/components/ChatRoom/ChatRoom';
+import useMessage from '@/views/Message/Message.hooks';
 
 const Message = () => {
-  const [chatView, setChatView] = useState<number>(0);
+  const {
+    conversationData,
+    handleSelectConversation,
+    selectedConversationId,
+    handleSwitchTab,
+  } = useMessage();
 
   return (
     <div className="flex bg-n-1 hide-overflow">
-      <ChatListPanel setChatView={setChatView} />
+      <ChatListPanel
+        listConversation={conversationData}
+        onSelectConversation={handleSelectConversation}
+        onSwitchTab={handleSwitchTab}
+      />
+
       <div className="grow">
-        {chatView === 0 && <ChatEmpty />}
-        {chatView === 1 && <ChatRoom />}
+        {
+          selectedConversationId && <ChatRoom conversationId={selectedConversationId} />
+        }
       </div>
     </div>
   );
