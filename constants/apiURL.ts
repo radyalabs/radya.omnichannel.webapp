@@ -18,4 +18,7 @@ export const ENDPOINT = {
     UPDATE_STATUS_BOT: (conversationId: string, botStatus: string) => `/conversation/${conversationId}/${botStatus}/bot`,
     UPDATE_STATUS_CONVERSATION: (conversationId: string, conversationStatus: string) => `/conversation/${conversationId}/${conversationStatus}/status`,
   },
+  DASHBOARD: {
+    OMNI_DASHBOARD_EMBED_SRC: 'https://metabase.radyalabs.id/public/dashboard/403bfe1c-79a2-4f47-9d07-bbdebd465b76',
+  },
 } as const;
