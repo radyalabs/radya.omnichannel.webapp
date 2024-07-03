@@ -2,7 +2,7 @@ interface ChatItemProps {
   /**
    * Variant of ChatItem
    */
-  variant?: 'served' | 'resolved' | 'unserved';
+  variant?: string;
   /**
    * Name of user in ChatItem
    */

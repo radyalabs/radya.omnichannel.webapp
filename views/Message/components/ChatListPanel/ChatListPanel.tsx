@@ -75,6 +75,7 @@ const ChatListPanel = (props: ChatListPanelProps) => {
               key={data.conversationId}
               name={data.name}
               onClick={() => onSelectConversation(data.conversationId)}
+              variant={data.status}
               placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             />
           ))

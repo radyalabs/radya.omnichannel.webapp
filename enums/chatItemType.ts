@@ -1,7 +1,7 @@
 enum ChatItemType {
-  Served = 'served',
-  Resolved = 'resolved',
-  Unserved = 'unserved',
+  Served = 'Served',
+  Resolved = 'Resolved',
+  Unserved = 'UnServed',
 }
 
 export default ChatItemType;

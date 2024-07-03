@@ -5,12 +5,14 @@ import {
   SendOutlined,
   TextSnippetOutlined,
 } from '@mui/icons-material';
+import { Switch } from '@mui/material';
 import { format } from 'date-fns';
 
 import Button from '@/components/base/Button';
 import Textarea from '@/components/base/Textarea';
 import Typography from '@/components/base/Typography';
 import Avatar from '@/components/ui/Avatar';
+import Modal from '@/components/ui/Modal';
 import ChatBubble from '@/views/Message/components/ChatBubble/ChatBubble';
 import ChatEmpty from '@/views/Message/components/ChatEmpty/ChatEmpty';
 import useChatRoom from '@/views/Message/components/ChatRoom/ChatRoom.hooks';
@@ -29,6 +31,12 @@ const ChatRoom = (props: ChatRoomProps) => {
     handleInputMessage,
     handleSendMessage,
     isSendingMessage,
+    toggleModal,
+    showModal,
+    resolveInput,
+    onChangeResolveInput,
+    submitResolve,
+    loadingUpdateStatus,
   } = useChatRoom(props);
 
   return (
@@ -49,11 +57,12 @@ const ChatRoom = (props: ChatRoomProps) => {
                         </Typography>
                       </div>
                       <div className="flex gap-5 justify-center items-center">
-                        <div className="flex">
+                        <div className="flex items-center gap-1">
                           <Typography variant="body" size="large" className="text-n-10">{isChatbot && 'Chatbot'}</Typography>
+                          <Switch />
                         </div>
                         <div className="flex gap-4 justify-center items-center">
-                          {status.toLowerCase() === 'unserved' && <Button color="primary">Resolve</Button>}
+                          {status.toLowerCase() !== 'resolved' && <Button color="primary" onClick={toggleModal}>Resolve</Button>}
                           <Button variant="text" color="primary" className="p-0">
                             <PendingOutlined />
                           </Button>
@@ -142,6 +151,34 @@ const ChatRoom = (props: ChatRoomProps) => {
           </div>
         )
       }
+
+      <Modal open={showModal} title="Mark As Resolved" width={620}>
+        <Modal.Content className="flex flex-col gap-5">
+          <Typography variant="body">
+            You can add conversation notes in this session in the form of
+            chat summaries with customers, chat, context as a reference, etc.
+          </Typography>
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-4 items-center">
+              <Avatar label="Hasbi Ashshidiq" height={44} width={44} />
+              <Typography variant="title">
+                {name}
+              </Typography>
+            </div>
+            <Textarea
+              block
+              value={resolveInput}
+              placeholder="Send a message ..."
+              onChange={onChangeResolveInput}
+              disabled={loadingUpdateStatus}
+            />
+          </div>
+        </Modal.Content>
+        <Modal.Footer className="gap-1">
+          <Button color="primary" variant="outline" onClick={toggleModal} disabled={loadingUpdateStatus}>Cancel</Button>
+          <Button color="primary" onClick={submitResolve} disabled={loadingUpdateStatus}>Submit</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

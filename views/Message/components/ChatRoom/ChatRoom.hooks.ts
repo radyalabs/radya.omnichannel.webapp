@@ -6,7 +6,9 @@ import type { HubConnection } from '@microsoft/signalr';
 import { HttpTransportType, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 import { ENDPOINT } from '@/constants/apiURL';
+import { useModalContext } from '@/contexts/ModalContext';
 import useGetData from '@/hooks/useGetData';
+import { usePatchData } from '@/hooks/useMutateData';
 import useToaster from '@/hooks/useToaster';
 import type {
   ChatMessage,
@@ -23,12 +25,17 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     setConversationMessage,
   ] = useState<ConversationMessageResponse>();
   const toaster = useToaster();
+  const modal = useModalContext();
 
   const [inputMessageType] = useState<number>(0);
   const [inputMessage, setInputMessage] = useState<string>('');
   const [connection, setConnection] = useState<HubConnection>();
   const [conversationIdR, setConversationIdR] = useState<string>('');
   const [isSendingMessage, setIsSendingMessage] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [resolveInput, setResolveInput] = useState<string>('');
+  const [resolveStatus, setResolveStatus] = useState<string>('');
+
   const { data: conversationMessageRes } = useGetData<ConversationMessageResponse>(
     ['conversation', conversationId],
     ENDPOINT.MESSAGE.CONVERSATION_MESSAGE(conversationId),
@@ -89,6 +96,55 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     }
   }, [messages]);
 
+  const toggleModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  const onChangeResolveInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const { target } = event;
+    const { value } = target;
+    setResolveInput(value);
+  };
+
+  const {
+    mutate: mutateUpdateStatus,
+    isLoading: loadingUpdateStatus,
+  } = usePatchData(
+    ['postResolve'],
+    ENDPOINT.MESSAGE.UPDATE_STATUS_CONVERSATION(conversationId, resolveStatus),
+    {
+      options: {
+        onSuccess: async () => {
+          modal.success({
+            content: 'Converation was resolved successfully',
+            onConfirm: () => modal.closeConfirm(),
+          });
+          setShowModal(false);
+
+          if (connection) {
+            await connection.invoke('GetConversation');
+          }
+        },
+      },
+    },
+  );
+
+  const submitResolve = () => {
+    let nextStatus = '';
+    const lowerCaseStatus = status.toLowerCase();
+
+    if (lowerCaseStatus === 'unserved') {
+      nextStatus = 'Served';
+    }
+
+    if (lowerCaseStatus === 'served') {
+      nextStatus = 'Resolved';
+    }
+
+    setResolveStatus(nextStatus);
+    mutateUpdateStatus({});
+  };
+
   useEffect(() => {
     async function start() {
       try {
@@ -144,6 +200,12 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     handleInputMessage,
     handleSendMessage,
     isSendingMessage,
+    toggleModal,
+    showModal,
+    resolveInput,
+    onChangeResolveInput,
+    submitResolve,
+    loadingUpdateStatus,
   };
 };
 
