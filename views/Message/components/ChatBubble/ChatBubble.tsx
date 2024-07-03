@@ -45,7 +45,7 @@ const ChatBubble = (props: ChatBubbleProps) => {
 
         {isSender && (
           <div className="pt-5">
-            <Avatar label="Hasbi Ashshidiq" height={35} width={35} className="bg-n-3" />
+            <Avatar label={name} height={35} width={35} className="bg-n-3" />
           </div>
         )}
       </div>
