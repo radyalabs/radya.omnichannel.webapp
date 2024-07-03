@@ -9,12 +9,6 @@ interface ChatBubbleProps {
   name: string;
   type: 'sender' | 'receiver'
   timestamp: string;
-  /**
-   * Name retrieved from conversation list
-   * to handle incorrect name from messages list
-   * of user in bubble
-   */
-  currentConversationName: string;
 }
 
 export default ChatBubbleProps;

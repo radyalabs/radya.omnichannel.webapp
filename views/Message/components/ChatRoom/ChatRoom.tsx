@@ -5,7 +5,7 @@ import {
   SendOutlined,
   TextSnippetOutlined,
 } from '@mui/icons-material';
-import { Switch } from '@mui/material';
+import { Drawer, Switch } from '@mui/material';
 import { format } from 'date-fns';
 
 import Button from '@/components/base/Button';
@@ -24,7 +24,6 @@ const ChatRoom = (props: ChatRoomProps) => {
   const {
     messages = [],
     name = '',
-    isChatbot = false,
     status = '',
     date = '',
     inputMessage,
@@ -37,6 +36,10 @@ const ChatRoom = (props: ChatRoomProps) => {
     onChangeResolveInput,
     submitResolve,
     loadingUpdateStatus,
+    inputIsChatbot,
+    onInputIsChatbotChange,
+    showDetail,
+    toggleShowDetail,
   } = useChatRoom(props);
 
   return (
@@ -51,22 +54,22 @@ const ChatRoom = (props: ChatRoomProps) => {
                     {/* Chat Room Head */}
                     <div className="flex px-6 py-4 justify-between border-b border-0 border-solid border-n-5">
                       <div className="flex gap-3.5 justify-center items-center">
-                        <Avatar label="Hasbi Ashshidiq" height={44} width={44} />
+                        <Avatar label={name} height={44} width={44} />
                         <Typography variant="title" size="small" className="text-n-10">
                           {name}
                         </Typography>
                       </div>
                       <div className="flex gap-5 justify-center items-center">
                         <div className="flex items-center gap-1">
-                          <Typography variant="body" size="large" className="text-n-10">{isChatbot && 'Chatbot'}</Typography>
-                          <Switch />
+                          <Typography variant="body" size="large" className="text-n-10">Chatbot</Typography>
+                          <Switch checked={inputIsChatbot} onChange={onInputIsChatbotChange} />
                         </div>
                         <div className="flex gap-4 justify-center items-center">
                           {status.toLowerCase() !== 'resolved' && <Button color="primary" onClick={toggleModal}>Resolve</Button>}
                           <Button variant="text" color="primary" className="p-0">
                             <PendingOutlined />
                           </Button>
-                          <Button variant="text" color="primary" className="p-0">
+                          <Button variant="text" color="primary" className="p-0" onClick={toggleShowDetail}>
                             <InfoOutlined />
                           </Button>
                         </div>
@@ -95,9 +98,10 @@ const ChatRoom = (props: ChatRoomProps) => {
                             )}
 
                             <ChatBubble
+                              currentConversationName={name}
                               name={message.fullname}
                               message={message.content}
-                              type={message.role === 'Customer' ? 'sender' : 'receiver'}
+                              type={message.role === 'Customer' ? 'receiver' : 'sender'}
                               timestamp={format(new Date(message.createdAt), 'HH:mm')}
                             />
                           </div>
@@ -160,7 +164,7 @@ const ChatRoom = (props: ChatRoomProps) => {
           </Typography>
           <div className="flex flex-col gap-4">
             <div className="flex gap-4 items-center">
-              <Avatar label="Hasbi Ashshidiq" height={44} width={44} />
+              <Avatar label={name} height={44} width={44} />
               <Typography variant="title">
                 {name}
               </Typography>
@@ -179,6 +183,46 @@ const ChatRoom = (props: ChatRoomProps) => {
           <Button color="primary" onClick={submitResolve} disabled={loadingUpdateStatus}>Submit</Button>
         </Modal.Footer>
       </Modal>
+
+      <Drawer
+        anchor="right"
+        onClose={toggleShowDetail}
+        open={showDetail}
+      >
+        <div
+          className="flex px-6 py-4 justify-between border-b border-0 border-solid border-n-5 w-64"
+        >
+          <div className="flex gap-3.5 justify-between items-center w-full">
+            <Typography variant="title" size="small" className="text-n-10">
+              Info Contact
+            </Typography>
+            <Button variant="text" onClick={toggleShowDetail}>
+              <Typography variant="title">
+                X
+              </Typography>
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-col px-6 py-4 gap-6">
+          <div className="flex gap-3.5 items-center">
+            <Avatar label={name} height={66} width={66} />
+            <div className="flex flex-col gap-3">
+              <Typography variant="title" size="small" className="text-n-10">
+                {name}
+              </Typography>
+              <Typography variant="body" size="small" className="text-n-10">
+                082123456789
+              </Typography>
+            </div>
+          </div>
+
+          <Typography variant="body" size="small" className="text-n-10 text-center">
+            Will expire soon &nbsp;
+            <b>(01:04:50)</b>
+          </Typography>
+        </div>
+      </Drawer>
     </div>
   );
 };

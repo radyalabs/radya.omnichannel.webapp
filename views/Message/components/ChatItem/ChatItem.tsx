@@ -26,7 +26,7 @@ const ChatItem = (props: ChatItemProps) => {
           {name}
         </Typography>
         <Typography
-          className="text-n-7 max-w-full text-ellipsis overflow-hidden text-nowrap"
+          className="text-n-7 max-w-full text-ellipsis overflow-hidden text-nowrap text-left"
         >
           {placeholder}
         </Typography>
