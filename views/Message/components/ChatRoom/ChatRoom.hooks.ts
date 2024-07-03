@@ -37,6 +37,7 @@ const useChatRoom = (conversationId: string) => {
     isChatbot,
     status,
     date,
+    conversationMessage,
   };
 };
 

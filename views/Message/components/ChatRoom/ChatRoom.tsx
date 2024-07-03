@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import type { HubConnection } from '@microsoft/signalr';
 import {
   InboxOutlined, InfoOutlined,
   InsertPhotoOutlined,
@@ -6,6 +9,7 @@ import {
   TextSnippetOutlined,
 } from '@mui/icons-material';
 import { format } from 'date-fns';
+import type { ChangeEvent } from 'react';
 
 import Button from '@/components/base/Button';
 import Textarea from '@/components/base/Textarea';
@@ -14,7 +18,10 @@ import Avatar from '@/components/ui/Avatar';
 import ChatBubble from '@/views/Message/components/ChatBubble/ChatBubble';
 import ChatEmpty from '@/views/Message/components/ChatEmpty/ChatEmpty';
 import useChatRoom from '@/views/Message/components/ChatRoom/ChatRoom.hooks';
-import type { ChatRoomProps } from '@/views/Message/components/ChatRoom/ChatRoom.types';
+import type {
+  ChatMessage,
+  ChatRoomProps,
+} from '@/views/Message/components/ChatRoom/ChatRoom.types';
 
 const ChatRoom = ({ conversationId }: ChatRoomProps) => {
   const {
@@ -23,7 +30,43 @@ const ChatRoom = ({ conversationId }: ChatRoomProps) => {
     isChatbot = false,
     status = '',
     date = '',
+    conversationMessage,
   } = useChatRoom(conversationId);
+
+  const [inputMessageType] = useState<number>(0);
+  const [inputMessage, setInputMessage] = useState<string>('');
+  const [connection] = useState<HubConnection>();
+
+  const handleInputMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const { target } = event;
+    const { value } = target;
+
+    setInputMessage(value);
+  };
+
+  const handleSendMessage = async () => {
+    const { conversation } = conversationMessage || {};
+    const { userId = '' } = conversation || {};
+
+    const messagePayload: ChatMessage = {
+      conversationId,
+      userId,
+      content: inputMessage,
+      messageType: inputMessageType,
+      fileUrl: '',
+    };
+
+    if (connection) {
+      connection
+        .invoke('SendMessage', messagePayload)
+        .then(() => {
+          setInputMessage('');
+        })
+        .catch((error) => {
+          console.error({ error });
+        });
+    }
+  };
 
   return (
     <div>
@@ -101,6 +144,8 @@ const ChatRoom = ({ conversationId }: ChatRoomProps) => {
                             input: 'border-0 outline-0 w-full max-h-16 resize-none',
                             container: ' my-1 h-12 w-full',
                           }}
+                          value={inputMessage}
+                          onChange={handleInputMessage}
                           block
                         />
                         <div className="flex items-center justify-between px-4">
@@ -115,7 +160,7 @@ const ChatRoom = ({ conversationId }: ChatRoomProps) => {
                               <InboxOutlined />
                             </Button>
                           </div>
-                          <Button size="small" color="primary" endIcon={<SendOutlined />}>Reply </Button>
+                          <Button size="small" color="primary" endIcon={<SendOutlined />} onClick={handleSendMessage}>Reply </Button>
                         </div>
                       </div>
                     </div>
