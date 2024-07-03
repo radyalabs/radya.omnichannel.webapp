@@ -7,9 +7,10 @@ import {
   IcFilter, IcFolderCheck, IcSearch, IcX,
 } from '@/components/icons';
 import DropdownButton from '@/components/ui/DropdownButton';
+
 import type {
   ChatListHeaderProps,
-} from '@/views/Message/components/ChatListHeader/ChatListHeader.types';
+} from './ChatListHeader.types';
 
 const ChatListHeader = (props: ChatListHeaderProps) => {
   const {

@@ -3,7 +3,8 @@ import Typography from '@/components/base/Typography';
 import { IcCheckResolved } from '@/components/icons';
 import Avatar from '@/components/ui/Avatar';
 import ChatItemType from '@/enums/chatItemType';
-import type ChatItemProps from '@/views/Message/components/ChatItem/ChatItem.types';
+
+import type ChatItemProps from './ChatItem.types';
 
 const ChatItem = (props: ChatItemProps) => {
   const {
