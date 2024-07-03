@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 
 import { ENDPOINT } from '@/constants/apiURL';
 import useGetData from '@/hooks/useGetData';
-import type { PaginationData } from '@/types/responses';
 import { createQueryParams } from '@/utils';
 
-import type { ConversationQueryParams, ConversationResponse } from './Mesages.types';
+import type {
+  ConversationList,
+  ConversationQueryParams,
+} from './Mesages.types';
 import { CONVERSATION_INITIAL_QUERY_PARAMS } from './Message.constants';
 import { indexConversationToStatus } from './Message.helpers';
 
@@ -17,7 +19,7 @@ const useMessage = () => {
   const [
     conversationData,
     setConversationData,
-  ] = useState<PaginationData<ConversationResponse>>();
+  ] = useState<ConversationList>();
   const [unresolvedChat, setUnresolvedChat] = useState<number>(0);
 
   const [
@@ -25,7 +27,7 @@ const useMessage = () => {
     setSelectedConversationId,
   ] = useState<string>('');
 
-  const { data: conversationRes } = useGetData<PaginationData<ConversationResponse>>(
+  const { data: conversationRes } = useGetData<ConversationList>(
     ['conversation', createQueryParams(conversationQueryParams)],
     ENDPOINT.MESSAGE.CONVERSATION,
     {

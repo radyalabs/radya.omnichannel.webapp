@@ -1,3 +1,5 @@
+import type { PaginationData } from '@/types/responses';
+
 export interface ConversationResponse {
   conversationId: string;
   userId: string;
@@ -45,3 +47,5 @@ export interface ConversationQueryParams {
   orderBy: string;
   orderType: string;
 }
+
+export type ConversationList = PaginationData<ConversationResponse>;
