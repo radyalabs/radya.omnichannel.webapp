@@ -1,6 +1,7 @@
-import type { ConversationResponse, ConversationStatus } from './Mesages.types';
+import type { ConversationStatus } from './Mesages.types';
 
-export const IndexConversationToStatus = (index: number): ConversationStatus => {
+// eslint-disable-next-line import/prefer-default-export
+export const indexConversationToStatus = (index: number): ConversationStatus => {
   let status = '';
   switch (index) {
     case 1:
@@ -19,14 +20,3 @@ export const IndexConversationToStatus = (index: number): ConversationStatus => 
 
   return status as ConversationStatus;
 };
-
-export const FilterConversationList = (
-  conversationList: ConversationResponse[],
-  typeConversation: number,
-) => conversationList.filter(
-  (conversation) => (
-    typeConversation !== 0
-      ? conversation.status
-      === IndexConversationToStatus(typeConversation) : conversation
-  ),
-);

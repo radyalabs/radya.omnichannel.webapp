@@ -7,7 +7,7 @@ import { createQueryParams } from '@/utils';
 
 import type { ConversationQueryParams, ConversationResponse } from './Mesages.types';
 import { CONVERSATION_INITIAL_QUERY_PARAMS } from './Message.constants';
-import { IndexConversationToStatus } from './Message.helpers';
+import { indexConversationToStatus } from './Message.helpers';
 
 const useMessage = () => {
   const [
@@ -39,7 +39,7 @@ const useMessage = () => {
   };
 
   const handleSwitchTab = (tabIndex: number) => {
-    const statusText = IndexConversationToStatus(tabIndex);
+    const statusText = indexConversationToStatus(tabIndex);
     setConversationData(undefined);
     setConversationQueryParams((prev) => ({ ...prev, status: statusText }));
     setSelectedConversationId('');
