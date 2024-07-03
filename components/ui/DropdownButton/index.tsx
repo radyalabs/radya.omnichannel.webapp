@@ -65,7 +65,8 @@ const DropdownButton = (props: DropdownButtonProps) => {
                 if (item.onClick) {
                   item.onClick();
                 }
-                handleClose();
+
+                if (item.dismissDropdown) handleClose();
               }}
             >
               {item.icon && (

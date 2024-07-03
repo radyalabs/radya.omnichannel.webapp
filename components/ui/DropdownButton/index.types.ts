@@ -14,4 +14,5 @@ export interface MenuItem {
   key?: string;
   danger?: boolean;
   onClick?: (data?: string) => void;
+  dismissDropdown?: boolean;
 }

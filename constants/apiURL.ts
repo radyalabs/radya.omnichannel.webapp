@@ -11,4 +11,10 @@ export const ENDPOINT = {
     USERS_BY_ID: (id: string) => `user-management/users/${id}`,
     SCOPES: '/user-management/users/application-scopes',
   },
+  MESSAGE: {
+    CONVERSATION: '/conversation',
+    CONVERSATION_MESSAGE: (conversationId: string) => `/conversation/${conversationId}/messages`,
+    CHAT_HUB: (userId: string) => `https://api-omnichannel.radyalabs.id/chatHub?userId=${userId}`,
+    UPDATE_STATUS_CONVERSATION: (conversationId: string, conversationStatus: string) => `/conversation/${conversationId}/${conversationStatus}/status`,
+  },
 } as const;
