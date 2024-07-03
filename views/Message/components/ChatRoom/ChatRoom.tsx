@@ -24,7 +24,6 @@ const ChatRoom = (props: ChatRoomProps) => {
   const {
     messages = [],
     name = '',
-    isChatbot = false,
     status = '',
     date = '',
     inputMessage,
@@ -37,6 +36,8 @@ const ChatRoom = (props: ChatRoomProps) => {
     onChangeResolveInput,
     submitResolve,
     loadingUpdateStatus,
+    inputIsChatbot,
+    onInputIsChatbotChange,
   } = useChatRoom(props);
 
   return (
@@ -51,15 +52,15 @@ const ChatRoom = (props: ChatRoomProps) => {
                     {/* Chat Room Head */}
                     <div className="flex px-6 py-4 justify-between border-b border-0 border-solid border-n-5">
                       <div className="flex gap-3.5 justify-center items-center">
-                        <Avatar label="Hasbi Ashshidiq" height={44} width={44} />
+                        <Avatar label={name} height={44} width={44} />
                         <Typography variant="title" size="small" className="text-n-10">
                           {name}
                         </Typography>
                       </div>
                       <div className="flex gap-5 justify-center items-center">
                         <div className="flex items-center gap-1">
-                          <Typography variant="body" size="large" className="text-n-10">{isChatbot && 'Chatbot'}</Typography>
-                          <Switch />
+                          <Typography variant="body" size="large" className="text-n-10">Chatbot</Typography>
+                          <Switch checked={inputIsChatbot} onChange={onInputIsChatbotChange} />
                         </div>
                         <div className="flex gap-4 justify-center items-center">
                           {status.toLowerCase() !== 'resolved' && <Button color="primary" onClick={toggleModal}>Resolve</Button>}
@@ -97,7 +98,7 @@ const ChatRoom = (props: ChatRoomProps) => {
                             <ChatBubble
                               name={message.fullname}
                               message={message.content}
-                              type={message.role === 'Customer' ? 'sender' : 'receiver'}
+                              type={message.role === 'Customer' ? 'receiver' : 'sender'}
                               timestamp={format(new Date(message.createdAt), 'HH:mm')}
                             />
                           </div>
@@ -160,7 +161,7 @@ const ChatRoom = (props: ChatRoomProps) => {
           </Typography>
           <div className="flex flex-col gap-4">
             <div className="flex gap-4 items-center">
-              <Avatar label="Hasbi Ashshidiq" height={44} width={44} />
+              <Avatar label={name} height={44} width={44} />
               <Typography variant="title">
                 {name}
               </Typography>

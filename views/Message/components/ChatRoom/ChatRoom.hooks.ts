@@ -1,11 +1,13 @@
 import {
-  type ChangeEvent, useCallback, useEffect, useState,
+  useCallback, useEffect, useState,
 } from 'react';
 
 import type { HubConnection } from '@microsoft/signalr';
 import { HttpTransportType, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import type { ChangeEvent } from 'react';
 
 import { ENDPOINT } from '@/constants/apiURL';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { useModalContext } from '@/contexts/ModalContext';
 import useGetData from '@/hooks/useGetData';
 import { usePatchData } from '@/hooks/useMutateData';
@@ -25,17 +27,28 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     conversationMessage,
     setConversationMessage,
   ] = useState<ConversationMessageResponse>();
+
+  const { profile } = useAuthContext();
   const toaster = useToaster();
   const modal = useModalContext();
+
+  const { conversation } = conversationMessage || {};
+  const {
+    messages,
+    name,
+    status = '',
+    isChatbot,
+    date = '',
+  } = conversation || {};
 
   const [inputMessageType] = useState<number>(0);
   const [inputMessage, setInputMessage] = useState<string>('');
   const [connection, setConnection] = useState<HubConnection>();
-  const [conversationIdR, setConversationIdR] = useState<string>('');
   const [isSendingMessage, setIsSendingMessage] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [resolveInput, setResolveInput] = useState<string>('');
   const [resolveStatus, setResolveStatus] = useState<string>('');
+  const [inputIsChatbot, setInputIsChatbot] = useState<boolean>(false);
 
   const { data: conversationMessageRes } = useGetData<ConversationMessageResponse>(
     ['conversation', conversationId],
@@ -47,16 +60,6 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     },
   );
 
-  const { conversation } = conversationMessage || {};
-  const {
-    messages,
-    name,
-    status = '',
-    isChatbot,
-    date = '',
-    userId = '',
-  } = conversation || {};
-
   const handleInputMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { target } = event;
     const { value } = target;
@@ -65,10 +68,11 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
   };
 
   const handleSendMessage = async () => {
+    const { userId: userIdAdmin = '' } = profile || {};
     setIsSendingMessage(true);
     const messagePayload: ChatMessage = {
-      conversationId: conversationIdR,
-      userId,
+      conversationId,
+      userId: userIdAdmin,
       content: inputMessage,
       messageType: inputMessageType,
       fileUrl: '',
@@ -76,7 +80,7 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
 
     if (connection) {
       connection
-        .invoke('SendMessage', conversationIdR, messagePayload)
+        .invoke('SendMessage', conversationId, messagePayload)
         .then(() => {
           setInputMessage('');
         })
@@ -111,7 +115,7 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     mutate: mutateUpdateStatus,
     isLoading: loadingUpdateStatus,
   } = usePatchData(
-    ['postResolve'],
+    ['patchResolve', conversationId, resolveStatus],
     ENDPOINT.MESSAGE.UPDATE_STATUS_CONVERSATION(conversationId, resolveStatus),
     {
       options: {
@@ -121,10 +125,20 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
             onConfirm: () => modal.closeConfirm(),
           });
           setShowModal(false);
+        },
+      },
+    },
+  );
 
-          if (connection) {
-            await connection.invoke('GetConversation');
-          }
+  const {
+    mutate: mutateUpdateBotStatus,
+  } = usePatchData(
+    ['patchStatusBot', String(inputIsChatbot)],
+    ENDPOINT.MESSAGE.UPDATE_STATUS_BOT(conversationId, String(!inputIsChatbot)),
+    {
+      options: {
+        onError: () => {
+          setInputIsChatbot((prev) => !prev);
         },
       },
     },
@@ -146,19 +160,30 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     mutateUpdateStatus({});
   };
 
+  const onInputIsChatbotChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    const { checked } = target;
+    setInputIsChatbot(checked);
+    mutateUpdateBotStatus({ });
+  };
+
   useEffect(() => {
     async function start() {
       try {
-        const conn = new HubConnectionBuilder()
-          .withUrl(ENDPOINT.MESSAGE.CHAT_HUB(userId), {
-            skipNegotiation: true,
-            transport: HttpTransportType.WebSockets,
-          })
-          .configureLogging(LogLevel.Information)
-          .build();
-        setConnection(conn);
+        const { userId: userIdSession } = profile || {};
 
-        await conn.start();
+        if (userIdSession) {
+          const conn = new HubConnectionBuilder()
+            .withUrl(ENDPOINT.MESSAGE.CHAT_HUB(userIdSession), {
+              skipNegotiation: true,
+              transport: HttpTransportType.WebSockets,
+            })
+            .configureLogging(LogLevel.Information)
+            .build();
+          setConnection(conn);
+
+          await conn.start();
+        }
       } catch (error) {
         toaster.error('Unable to connect with conversation');
         // eslint-disable-next-line no-console
@@ -167,14 +192,10 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     }
 
     start();
-  }, [toaster, userId]);
+  }, [profile, toaster]);
 
   useEffect(() => {
     if (connection) {
-      connection.on('GetConversation', (conversationRes) => {
-        setConversationIdR(conversationRes);
-      });
-
       connection.on('SendMessage', (msg) => {
         updateConversation(msg);
       });
@@ -187,6 +208,9 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
 
   useEffect(() => {
     if (conversationMessageRes) {
+      const { conversation: conversationRes } = conversationMessageRes;
+      const { isChatbot: isChatbotRes } = conversationRes;
+      setInputIsChatbot(isChatbotRes);
       setConversationMessage(conversationMessageRes);
     }
   }, [conversationMessageRes, setConversationMessage]);
@@ -207,6 +231,8 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     onChangeResolveInput,
     submitResolve,
     loadingUpdateStatus,
+    inputIsChatbot,
+    onInputIsChatbotChange,
   };
 };
 
