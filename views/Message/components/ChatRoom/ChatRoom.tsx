@@ -23,15 +23,16 @@ import type {
   ChatRoomProps,
 } from '@/views/Message/components/ChatRoom/ChatRoom.types';
 
-const ChatRoom = ({ conversationId }: ChatRoomProps) => {
+const ChatRoom = (props: ChatRoomProps) => {
   const {
     messages = [],
     name = '',
     isChatbot = false,
     status = '',
     date = '',
+    conversationId = '',
     conversationMessage,
-  } = useChatRoom(conversationId);
+  } = useChatRoom(props);
 
   const [inputMessageType] = useState<number>(0);
   const [inputMessage, setInputMessage] = useState<string>('');

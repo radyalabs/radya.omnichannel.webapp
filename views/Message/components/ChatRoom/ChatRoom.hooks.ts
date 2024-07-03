@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { ENDPOINT } from '@/constants/apiURL';
 import useGetData from '@/hooks/useGetData';
+import type { ChatRoomProps } from '@/views/Message/components/ChatRoom/ChatRoom.types';
 import type { ConversationMessageResponse } from '@/views/Message/Mesages.types';
 
-const useChatRoom = (conversationId: string) => {
+const useChatRoom = ({ conversationId }: ChatRoomProps) => {
   const [
     conversationMessage,
     setConversationMessage,
@@ -29,7 +30,7 @@ const useChatRoom = (conversationId: string) => {
     if (conversationMessageRes) {
       setConversationMessage(conversationMessageRes);
     }
-  }, [conversationMessageRes]);
+  }, [conversationMessageRes, setConversationMessage]);
 
   return {
     messages,
@@ -37,6 +38,7 @@ const useChatRoom = (conversationId: string) => {
     isChatbot,
     status,
     date,
+    conversationId,
     conversationMessage,
   };
 };

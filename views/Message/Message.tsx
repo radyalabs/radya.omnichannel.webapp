@@ -10,6 +10,7 @@ const Message = () => {
     handleSelectConversation,
     selectedConversationId,
     handleSwitchTab,
+    unresolvedChat,
   } = useMessage();
 
   return (
@@ -18,6 +19,7 @@ const Message = () => {
         listConversation={conversationData}
         onSelectConversation={handleSelectConversation}
         onSwitchTab={handleSwitchTab}
+        unresolvedChat={unresolvedChat}
       />
 
       <div className="grow">

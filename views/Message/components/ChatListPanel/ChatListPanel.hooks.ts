@@ -5,7 +5,12 @@ import type {
 } from '@/views/Message/components/ChatListPanel/ChatListPanel.types';
 
 const useChatListPanel = (props: ChatListPanelProps) => {
-  const { listConversation, onSelectConversation, onSwitchTab } = props;
+  const {
+    listConversation,
+    onSelectConversation,
+    onSwitchTab,
+    unresolvedChat,
+  } = props;
   const [tabValue, setTabValue] = useState(0);
   const handleChangeTab = (value: number) => {
     setTabValue(value);
@@ -19,6 +24,7 @@ const useChatListPanel = (props: ChatListPanelProps) => {
     tabValue,
     handleChangeTab,
     items,
+    unresolvedChat,
   };
 };
 

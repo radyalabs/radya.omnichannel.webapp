@@ -17,13 +17,14 @@ const ChatListPanel = (props: ChatListPanelProps) => {
     handleChangeTab,
     items,
     onSelectConversation,
+    unresolvedChat,
   } = useChatListPanel(props);
 
   return (
     <div
       className="border-0 border-solid border-n-5 border-r-2 flex flex-col h-[calc(100vh-5rem)] max-w-96"
     >
-      <ChatListHeader />
+      <ChatListHeader unresolvedChat={unresolvedChat} />
       <Tabs
         className="pt-2"
         labels={['All', 'Unserved', 'Served', 'Resolved']}

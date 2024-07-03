@@ -17,6 +17,7 @@ const useMessage = () => {
     conversationData,
     setConversationData,
   ] = useState<PaginationData<ConversationResponse>>();
+  const [unresolvedChat, setUnresolvedChat] = useState<number>(0);
 
   const [
     selectedConversationId,
@@ -44,6 +45,8 @@ const useMessage = () => {
 
   useEffect(() => {
     if (conversationRes) {
+      const { items } = conversationRes;
+      setUnresolvedChat(items.filter((item) => item.status.toLowerCase() === 'unserved').length);
       setConversationData(conversationRes);
     }
   }, [conversationRes]);
@@ -53,6 +56,7 @@ const useMessage = () => {
     handleSelectConversation,
     selectedConversationId,
     handleSwitchTab,
+    unresolvedChat,
   };
 };
 

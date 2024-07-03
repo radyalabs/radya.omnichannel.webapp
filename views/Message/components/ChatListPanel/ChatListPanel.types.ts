@@ -5,4 +5,5 @@ export interface ChatListPanelProps {
   listConversation?: PaginationData<ConversationResponse>;
   onSelectConversation: (conversationId: string) => void;
   onSwitchTab: (tabIndex: number) => void;
+  unresolvedChat: number;
 }
