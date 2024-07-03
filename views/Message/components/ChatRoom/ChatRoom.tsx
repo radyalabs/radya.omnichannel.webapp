@@ -13,12 +13,12 @@ import Textarea from '@/components/base/Textarea';
 import Typography from '@/components/base/Typography';
 import Avatar from '@/components/ui/Avatar';
 import Modal from '@/components/ui/Modal';
-import ChatBubble from '@/views/Message/components/ChatBubble/ChatBubble';
-import ChatEmpty from '@/views/Message/components/ChatEmpty/ChatEmpty';
-import useChatRoom from '@/views/Message/components/ChatRoom/ChatRoom.hooks';
-import type {
-  ChatRoomProps,
-} from '@/views/Message/components/ChatRoom/ChatRoom.types';
+
+import ChatBubble from '../ChatBubble/ChatBubble';
+import ChatEmpty from '../ChatEmpty/ChatEmpty';
+
+import useChatRoom from './ChatRoom.hooks';
+import type { ChatRoomProps } from './ChatRoom.types';
 
 const ChatRoom = (props: ChatRoomProps) => {
   const {

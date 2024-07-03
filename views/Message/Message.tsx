@@ -1,8 +1,8 @@
 'use client';
 
-import ChatListPanel from '@/views/Message/components/ChatListPanel/ChatListPanel';
-import ChatRoom from '@/views/Message/components/ChatRoom/ChatRoom';
-import useMessage from '@/views/Message/Message.hooks';
+import ChatListPanel from './components/ChatListPanel/ChatListPanel';
+import ChatRoom from './components/ChatRoom/ChatRoom';
+import useMessage from './Message.hooks';
 
 const Message = () => {
   const {

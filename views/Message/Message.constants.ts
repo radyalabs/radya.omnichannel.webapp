@@ -1,4 +1,4 @@
-import type { ConversationQueryParams } from '@/views/Message/Mesages.types';
+import type { ConversationQueryParams } from './Mesages.types';
 
 // eslint-disable-next-line import/prefer-default-export
 export const CONVERSATION_INITIAL_QUERY_PARAMS: ConversationQueryParams = {

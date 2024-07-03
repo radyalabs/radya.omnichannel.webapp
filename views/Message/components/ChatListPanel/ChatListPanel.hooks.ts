@@ -2,7 +2,7 @@ import { type ChangeEvent, type KeyboardEvent, useState } from 'react';
 
 import type {
   ChatListPanelProps,
-} from '@/views/Message/components/ChatListPanel/ChatListPanel.types';
+} from './ChatListPanel.types';
 
 const useChatListPanel = (props: ChatListPanelProps) => {
   const {

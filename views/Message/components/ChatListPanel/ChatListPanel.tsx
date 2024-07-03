@@ -5,11 +5,12 @@ import {
   SolarUsersGroupTwoRoundedBold,
   SolarUserSpeakFill,
 } from '@/components/icons';
-import useChatListPanel from '@/views/Message/components/ChatListPanel/ChatListPanel.hooks';
-import type { ChatListPanelProps } from '@/views/Message/components/ChatListPanel/ChatListPanel.types';
 
 import ChatItem from '../ChatItem';
 import ChatListHeader from '../ChatListHeader';
+
+import useChatListPanel from './ChatListPanel.hooks';
+import type { ChatListPanelProps } from './ChatListPanel.types';
 
 const ChatListPanel = (props: ChatListPanelProps) => {
   const {

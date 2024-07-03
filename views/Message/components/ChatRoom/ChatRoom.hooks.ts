@@ -11,13 +11,14 @@ import useGetData from '@/hooks/useGetData';
 import { usePatchData } from '@/hooks/useMutateData';
 import useToaster from '@/hooks/useToaster';
 import type {
-  ChatMessage,
-  ChatRoomProps,
-} from '@/views/Message/components/ChatRoom/ChatRoom.types';
-import type {
   ConversationItemMessages,
   ConversationMessageResponse,
 } from '@/views/Message/Mesages.types';
+
+import type {
+  ChatMessage,
+  ChatRoomProps,
+} from './ChatRoom.types';
 
 const useChatRoom = ({ conversationId }: ChatRoomProps) => {
   const [

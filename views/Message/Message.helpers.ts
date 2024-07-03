@@ -1,4 +1,4 @@
-import type { ConversationResponse, ConversationStatus } from '@/views/Message/Mesages.types';
+import type { ConversationResponse, ConversationStatus } from './Mesages.types';
 
 export const IndexConversationToStatus = (index: number): ConversationStatus => {
   let status = '';
