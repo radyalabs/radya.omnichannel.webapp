@@ -7,7 +7,11 @@ import type ChatBubbleProps from './ChatBubble.types';
 
 const ChatBubble = (props: ChatBubbleProps) => {
   const {
-    message, name, type, timestamp,
+    message,
+    name,
+    type,
+    timestamp,
+    currentConversationName,
   } = props;
 
   const isReceiver = type === 'receiver';
@@ -26,7 +30,9 @@ const ChatBubble = (props: ChatBubbleProps) => {
 
         <div className={`flex flex-col ${isReceiver ? 'ml-4' : 'mr-4'}`}>
           <div className={`flex gap-2.5 ${isSender ? 'justify-start flex-row-reverse ' : ''}`}>
-            <Typography variant="body" size="medium" className="text-n-10 font-semibold">{name}</Typography>
+            <Typography variant="body" size="medium" className="text-n-10 font-semibold">
+              {isSender ? name : currentConversationName}
+            </Typography>
             <Typography variant="body" size="medium" className="text-n-8 font-medium">{timestamp}</Typography>
           </div>
           <div

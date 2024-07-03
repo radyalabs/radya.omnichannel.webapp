@@ -96,6 +96,7 @@ const ChatRoom = (props: ChatRoomProps) => {
                             )}
 
                             <ChatBubble
+                              currentConversationName={name}
                               name={message.fullname}
                               message={message.content}
                               type={message.role === 'Customer' ? 'receiver' : 'sender'}
