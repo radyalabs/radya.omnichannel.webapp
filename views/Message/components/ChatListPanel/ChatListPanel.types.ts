@@ -6,4 +6,5 @@ export interface ChatListPanelProps {
   onSelectConversation: (conversationId: string) => void;
   onSwitchTab: (tabIndex: number) => void;
   unresolvedChat: number;
+  handleSearchSubmit: (search: string | null) => void;
 }

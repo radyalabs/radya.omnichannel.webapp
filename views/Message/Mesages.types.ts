@@ -39,7 +39,7 @@ export type ConversationStatus = '' | 'UnServed' | 'Served' | 'Resolved';
 export interface ConversationQueryParams {
   [key: string]: string | number | null;
   status: ConversationStatus;
-  fullname: string;
+  fullname: string | null;
   page: number;
   size: number | null;
   orderBy: string;

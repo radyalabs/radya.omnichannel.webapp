@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ChangeEvent, type KeyboardEvent, useState } from 'react';
 
 import type {
   ChatListPanelProps,
@@ -10,6 +10,7 @@ const useChatListPanel = (props: ChatListPanelProps) => {
     onSelectConversation,
     onSwitchTab,
     unresolvedChat,
+    handleSearchSubmit,
   } = props;
   const [tabValue, setTabValue] = useState(0);
   const handleChangeTab = (value: number) => {
@@ -17,14 +18,45 @@ const useChatListPanel = (props: ChatListPanelProps) => {
     onSwitchTab(value);
   };
 
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const handleChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    const { value } = target;
+    setSearchValue(value);
+  };
+
+  const toggleShowSearch = () => {
+    setShowSearch((prev) => !prev);
+  };
+
+  const handleSearchEnter = (event: KeyboardEvent<HTMLInputElement>) => {
+    const { key } = event;
+    if (key === 'Enter') {
+      toggleShowSearch();
+      handleSearchSubmit(searchValue);
+    }
+  };
+
+  const handleResetSearch = () => {
+    setSearchValue('');
+  };
+
   const { items = [] } = listConversation || {};
 
   return {
-    onSelectConversation,
     tabValue,
     handleChangeTab,
     items,
+    onSelectConversation,
     unresolvedChat,
+    toggleShowSearch,
+    showSearch,
+    searchValue,
+    handleChangeSearch,
+    handleSearchEnter,
+    handleResetSearch,
   };
 };
 

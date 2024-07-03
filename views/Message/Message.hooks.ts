@@ -43,6 +43,10 @@ const useMessage = () => {
     setConversationQueryParams((prev) => ({ ...prev, status: statusText }));
   };
 
+  const handleSearchSubmit = (searchInput: string | null) => {
+    setConversationQueryParams((prev) => ({ ...prev, fullname: searchInput }));
+  };
+
   useEffect(() => {
     if (conversationRes) {
       const { items } = conversationRes;
@@ -57,6 +61,7 @@ const useMessage = () => {
     selectedConversationId,
     handleSwitchTab,
     unresolvedChat,
+    handleSearchSubmit,
   };
 };
 

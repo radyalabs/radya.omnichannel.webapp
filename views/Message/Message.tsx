@@ -11,6 +11,7 @@ const Message = () => {
     selectedConversationId,
     handleSwitchTab,
     unresolvedChat,
+    handleSearchSubmit,
   } = useMessage();
 
   return (
@@ -20,6 +21,7 @@ const Message = () => {
         onSelectConversation={handleSelectConversation}
         onSwitchTab={handleSwitchTab}
         unresolvedChat={unresolvedChat}
+        handleSearchSubmit={handleSearchSubmit}
       />
 
       <div className="grow">
