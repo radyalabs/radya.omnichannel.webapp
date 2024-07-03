@@ -2,6 +2,7 @@ import Button from '@/components/base/Button';
 import Tabs from '@/components/base/Tabs';
 import TextField from '@/components/base/Textfield';
 import {
+  IcSearch,
   IcX,
   SolarUserCrossFill,
   SolarUserCrossFill1,
@@ -39,7 +40,7 @@ const ChatListPanel = (props: ChatListPanelProps) => {
           && (
             <div className="block absolute -bottom-full -right-1/2 -translate-x-1/2  z-10 w-full">
               <div className="flex gap-3 bg-white w-full py-6">
-                <TextField placeholder="Search customer" className="w-full ml-4" value={searchValue} onChange={handleChangeSearch} onKeyDown={handleSearchEnter} block />
+                <TextField placeholder="Search customer" className="w-full ml-4" value={searchValue} onChange={handleChangeSearch} onKeyDown={handleSearchEnter} prependObject={<IcSearch />} block />
                 <Button color="primary" size="small" className="mr-4" onClick={handleResetSearch}><IcX className="[&>*]:fill-gray-50" /></Button>
               </div>
             </div>

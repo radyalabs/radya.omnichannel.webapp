@@ -46,6 +46,7 @@ const useMessage = () => {
 
   const handleSearchSubmit = (searchInput: string | null) => {
     setConversationQueryParams((prev) => ({ ...prev, fullname: searchInput }));
+    setSelectedConversationId('');
   };
 
   useEffect(() => {

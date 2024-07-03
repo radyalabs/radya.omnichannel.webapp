@@ -41,6 +41,8 @@ const useChatListPanel = (props: ChatListPanelProps) => {
 
   const handleResetSearch = () => {
     setSearchValue('');
+    handleSearchSubmit('');
+    toggleShowSearch();
   };
 
   const { items = [] } = listConversation || {};
