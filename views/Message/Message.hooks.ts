@@ -41,6 +41,7 @@ const useMessage = () => {
     const statusText = IndexConversationToStatus(tabIndex);
     setConversationData(undefined);
     setConversationQueryParams((prev) => ({ ...prev, status: statusText }));
+    setSelectedConversationId('');
   };
 
   const handleSearchSubmit = (searchInput: string | null) => {

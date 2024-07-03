@@ -1,26 +1,34 @@
-import { type ChangeEvent, useEffect, useState } from 'react';
+import {
+  type ChangeEvent, useCallback, useEffect, useState,
+} from 'react';
 
 import type { HubConnection } from '@microsoft/signalr';
 import { HttpTransportType, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 import { ENDPOINT } from '@/constants/apiURL';
 import useGetData from '@/hooks/useGetData';
+import useToaster from '@/hooks/useToaster';
 import type {
   ChatMessage,
   ChatRoomProps,
 } from '@/views/Message/components/ChatRoom/ChatRoom.types';
-import type { ConversationMessageResponse } from '@/views/Message/Mesages.types';
+import type {
+  ConversationItemMessages,
+  ConversationMessageResponse,
+} from '@/views/Message/Mesages.types';
 
 const useChatRoom = ({ conversationId }: ChatRoomProps) => {
   const [
     conversationMessage,
     setConversationMessage,
   ] = useState<ConversationMessageResponse>();
+  const toaster = useToaster();
 
   const [inputMessageType] = useState<number>(0);
   const [inputMessage, setInputMessage] = useState<string>('');
   const [connection, setConnection] = useState<HubConnection>();
   const [conversationIdR, setConversationIdR] = useState<string>('');
+  const [isSendingMessage, setIsSendingMessage] = useState<boolean>(false);
   const { data: conversationMessageRes } = useGetData<ConversationMessageResponse>(
     ['conversation', conversationId],
     ENDPOINT.MESSAGE.CONVERSATION_MESSAGE(conversationId),
@@ -49,6 +57,7 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
   };
 
   const handleSendMessage = async () => {
+    setIsSendingMessage(true);
     const messagePayload: ChatMessage = {
       conversationId: conversationIdR,
       userId,
@@ -66,16 +75,25 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
         .catch((error) => {
           // eslint-disable-next-line no-console
           console.error({ error });
+        })
+        .finally(() => {
+          setIsSendingMessage(false);
         });
     }
   };
+
+  const updateConversation = useCallback((message: ConversationItemMessages) => {
+    const { messageId } = message;
+    if (!(messages || []).find((m) => m.messageId === messageId)) {
+      (messages || []).push(message);
+    }
+  }, [messages]);
 
   useEffect(() => {
     async function start() {
       try {
         const conn = new HubConnectionBuilder()
-          // .withUrl(ENDPOINT.MESSAGE.CONVERSATION_MESSAGE(conversationId), {
-          .withUrl(`https://api-omnichannel.radyalabs.id/chatHub?userId=${userId}`, {
+          .withUrl(ENDPOINT.MESSAGE.CHAT_HUB(userId), {
             skipNegotiation: true,
             transport: HttpTransportType.WebSockets,
           })
@@ -83,25 +101,32 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
           .build();
         setConnection(conn);
 
-        conn.on('GetConversation', (conversationRes) => {
-          setConversationIdR(conversationRes);
-        });
-
-        // dua event bawah di push
-        // filter based from conversationId
-        conn.on('SendMessage', () => {});
-        conn.on('ReceiveMessage', () => {});
-
         await conn.start();
-        // await conn.invoke('GetConversation');
       } catch (error) {
+        toaster.error('Unable to connect with conversation');
         // eslint-disable-next-line no-console
         console.error({ error });
       }
     }
 
     start();
-  }, [userId]);
+  }, [toaster, userId]);
+
+  useEffect(() => {
+    if (connection) {
+      connection.on('GetConversation', (conversationRes) => {
+        setConversationIdR(conversationRes);
+      });
+
+      connection.on('SendMessage', (msg) => {
+        updateConversation(msg);
+      });
+
+      connection.on('ReceiveMessage', (msg) => {
+        updateConversation(msg);
+      });
+    }
+  }, [connection, updateConversation]);
 
   useEffect(() => {
     if (conversationMessageRes) {
@@ -118,6 +143,7 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     inputMessage,
     handleInputMessage,
     handleSendMessage,
+    isSendingMessage,
   };
 };
 

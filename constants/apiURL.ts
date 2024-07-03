@@ -14,6 +14,6 @@ export const ENDPOINT = {
   MESSAGE: {
     CONVERSATION: '/conversation',
     CONVERSATION_MESSAGE: (conversationId: string) => `/conversation/${conversationId}/messages`,
-    CHATHUB: (userId: string) => `/chatHub?userId=${userId}`,
+    CHAT_HUB: (userId: string) => `https://api-omnichannel.radyalabs.id/chatHub?userId=${userId}`,
   },
 } as const;

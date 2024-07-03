@@ -28,6 +28,7 @@ const ChatRoom = (props: ChatRoomProps) => {
     inputMessage,
     handleInputMessage,
     handleSendMessage,
+    isSendingMessage,
   } = useChatRoom(props);
 
   return (
@@ -112,17 +113,25 @@ const ChatRoom = (props: ChatRoomProps) => {
                         />
                         <div className="flex items-center justify-between px-4">
                           <div className="flex gap-2.5">
-                            <Button variant="text" color="primary" className="p-0">
+                            <Button variant="text" color="primary" className="p-0" disabled={isSendingMessage}>
                               <TextSnippetOutlined />
                             </Button>
-                            <Button variant="text" color="primary" className="p-0">
+                            <Button variant="text" color="primary" className="p-0" disabled={isSendingMessage}>
                               <InsertPhotoOutlined />
                             </Button>
-                            <Button variant="text" color="primary" className="p-0">
+                            <Button variant="text" color="primary" className="p-0" disabled={isSendingMessage}>
                               <InboxOutlined />
                             </Button>
                           </div>
-                          <Button size="small" color="primary" endIcon={<SendOutlined />} onClick={handleSendMessage}>Reply </Button>
+                          <Button
+                            size="small"
+                            color="primary"
+                            endIcon={<SendOutlined />}
+                            onClick={handleSendMessage}
+                            disabled={isSendingMessage}
+                          >
+                            Reply
+                          </Button>
                         </div>
                       </div>
                     </div>
