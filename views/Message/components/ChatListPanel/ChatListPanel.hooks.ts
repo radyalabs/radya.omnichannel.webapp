@@ -18,7 +18,6 @@ const useChatListPanel = (props: ChatListPanelProps) => {
     onSwitchTab(value);
   };
 
-  const [showSearch, setShowSearch] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,22 +26,16 @@ const useChatListPanel = (props: ChatListPanelProps) => {
     setSearchValue(value);
   };
 
-  const toggleShowSearch = () => {
-    setShowSearch((prev) => !prev);
+  const handleResetSearch = () => {
+    setSearchValue('');
+    handleSearchSubmit('');
   };
 
   const handleSearchEnter = (event: KeyboardEvent<HTMLInputElement>) => {
     const { key } = event;
     if (key === 'Enter') {
-      toggleShowSearch();
       handleSearchSubmit(searchValue);
     }
-  };
-
-  const handleResetSearch = () => {
-    setSearchValue('');
-    handleSearchSubmit('');
-    toggleShowSearch();
   };
 
   const { items = [] } = listConversation || {};
@@ -53,12 +46,10 @@ const useChatListPanel = (props: ChatListPanelProps) => {
     items,
     onSelectConversation,
     unresolvedChat,
-    toggleShowSearch,
-    showSearch,
     searchValue,
     handleChangeSearch,
-    handleSearchEnter,
     handleResetSearch,
+    handleSearchEnter,
   };
 };
 

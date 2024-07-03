@@ -1,9 +1,5 @@
-import Button from '@/components/base/Button';
 import Tabs from '@/components/base/Tabs';
-import TextField from '@/components/base/Textfield';
 import {
-  IcSearch,
-  IcX,
   SolarUserCrossFill,
   SolarUserCrossFill1,
   SolarUsersGroupTwoRoundedBold,
@@ -22,31 +18,24 @@ const ChatListPanel = (props: ChatListPanelProps) => {
     items,
     onSelectConversation,
     unresolvedChat,
-    toggleShowSearch,
-    showSearch,
     searchValue,
     handleChangeSearch,
-    handleSearchEnter,
     handleResetSearch,
+    handleSearchEnter,
   } = useChatListPanel(props);
 
   return (
     <div
       className="border-0 border-solid border-n-5 border-r-2 flex flex-col h-[calc(100vh-5rem)] max-w-96 relative"
     >
-      <ChatListHeader toggleShowSearch={toggleShowSearch} unresolvedChat={unresolvedChat}>
-        {
-          showSearch
-          && (
-            <div className="block absolute -bottom-full -right-1/2 -translate-x-1/2  z-10 w-full">
-              <div className="flex gap-3 bg-white w-full py-6">
-                <TextField placeholder="Search customer" className="w-full ml-4" value={searchValue} onChange={handleChangeSearch} onKeyDown={handleSearchEnter} prependObject={<IcSearch />} block />
-                <Button color="primary" size="small" className="mr-4" onClick={handleResetSearch}><IcX className="[&>*]:fill-gray-50" /></Button>
-              </div>
-            </div>
-          )
-        }
-      </ChatListHeader>
+      <ChatListHeader
+        unresolvedChat={unresolvedChat}
+        searchValue={searchValue}
+        handleChangeSearch={handleChangeSearch}
+        handleResetSearch={handleResetSearch}
+        handleSearchEnter={handleSearchEnter}
+      />
+
       <Tabs
         className="pt-2"
         labels={['All', 'Unserved', 'Served', 'Resolved']}
