@@ -49,6 +49,7 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
   const [resolveInput, setResolveInput] = useState<string>('');
   const [resolveStatus, setResolveStatus] = useState<string>('');
   const [inputIsChatbot, setInputIsChatbot] = useState<boolean>(false);
+  const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const { data: conversationMessageRes } = useGetData<ConversationMessageResponse>(
     ['conversation', conversationId],
@@ -167,6 +168,10 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     mutateUpdateBotStatus({ });
   };
 
+  const toggleShowDetail = () => {
+    setShowDetail((prev) => !prev);
+  };
+
   useEffect(() => {
     async function start() {
       try {
@@ -233,6 +238,8 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
     loadingUpdateStatus,
     inputIsChatbot,
     onInputIsChatbotChange,
+    showDetail,
+    toggleShowDetail,
   };
 };
 

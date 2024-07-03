@@ -5,7 +5,7 @@ import {
   SendOutlined,
   TextSnippetOutlined,
 } from '@mui/icons-material';
-import { Switch } from '@mui/material';
+import { Drawer, Switch } from '@mui/material';
 import { format } from 'date-fns';
 
 import Button from '@/components/base/Button';
@@ -38,6 +38,8 @@ const ChatRoom = (props: ChatRoomProps) => {
     loadingUpdateStatus,
     inputIsChatbot,
     onInputIsChatbotChange,
+    showDetail,
+    toggleShowDetail,
   } = useChatRoom(props);
 
   return (
@@ -67,7 +69,7 @@ const ChatRoom = (props: ChatRoomProps) => {
                           <Button variant="text" color="primary" className="p-0">
                             <PendingOutlined />
                           </Button>
-                          <Button variant="text" color="primary" className="p-0">
+                          <Button variant="text" color="primary" className="p-0" onClick={toggleShowDetail}>
                             <InfoOutlined />
                           </Button>
                         </div>
@@ -181,6 +183,46 @@ const ChatRoom = (props: ChatRoomProps) => {
           <Button color="primary" onClick={submitResolve} disabled={loadingUpdateStatus}>Submit</Button>
         </Modal.Footer>
       </Modal>
+
+      <Drawer
+        anchor="right"
+        onClose={toggleShowDetail}
+        open={showDetail}
+      >
+        <div
+          className="flex px-6 py-4 justify-between border-b border-0 border-solid border-n-5 w-64"
+        >
+          <div className="flex gap-3.5 justify-between items-center w-full">
+            <Typography variant="title" size="small" className="text-n-10">
+              Info Contact
+            </Typography>
+            <Button variant="text" onClick={toggleShowDetail}>
+              <Typography variant="title">
+                X
+              </Typography>
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-col px-6 py-4 gap-6">
+          <div className="flex gap-3.5 items-center">
+            <Avatar label={name} height={66} width={66} />
+            <div className="flex flex-col gap-3">
+              <Typography variant="title" size="small" className="text-n-10">
+                {name}
+              </Typography>
+              <Typography variant="body" size="small" className="text-n-10">
+                082123456789
+              </Typography>
+            </div>
+          </div>
+
+          <Typography variant="body" size="small" className="text-n-10 text-center">
+            Will expire soon &nbsp;
+            <b>(01:04:50)</b>
+          </Typography>
+        </div>
+      </Drawer>
     </div>
   );
 };
