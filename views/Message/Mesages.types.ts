@@ -1,37 +1,37 @@
 export interface ConversationResponse {
-  conversationId: string
-  userId: string
-  name: string
-  date: string
-  status: string
-  isChatbot: boolean
-  lastMessage: string
+  conversationId: string;
+  userId: string;
+  name: string;
+  date: string;
+  status: ConversationStatus;
+  isChatbot: boolean;
+  lastMessage: string;
 }
 
 export interface ConversationMessageResponse {
-  conversation: ConversationItem
+  conversation: ConversationItem;
 }
 
 export interface ConversationItem {
-  conversationId: string
-  userId: string
-  name: string
-  date: string
-  status: string
-  isChatbot: boolean
+  conversationId: string;
+  userId: string;
+  name: string;
+  date: string;
+  status: string;
+  isChatbot: boolean;
   messages: ConversationItemMessages[]
 }
 
 export interface ConversationItemMessages {
-  conversationId: string
-  messageId: string
-  content: string
-  type: string
-  fileUrl: string
-  isRead: boolean
-  fullname: string
-  role: string
-  createdAt: string
+  conversationId: string;
+  messageId: string;
+  content: string;
+  type: string;
+  fileUrl: string;
+  isRead: boolean;
+  fullname: string;
+  role: string;
+  createdAt: string;
 }
 
 export type ConversationStatus = '' | 'UnServed' | 'Served' | 'Resolved';

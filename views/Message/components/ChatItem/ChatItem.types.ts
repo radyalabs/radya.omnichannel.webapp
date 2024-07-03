@@ -1,8 +1,10 @@
+import type { ConversationStatus } from '@/views/Message/Mesages.types';
+
 interface ChatItemProps {
   /**
    * Variant of ChatItem
    */
-  variant?: string;
+  variant?: ConversationStatus;
   /**
    * Name of user in ChatItem
    */
