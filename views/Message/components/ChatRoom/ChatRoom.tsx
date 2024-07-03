@@ -1,6 +1,3 @@
-import { useState } from 'react';
-
-import type { HubConnection } from '@microsoft/signalr';
 import {
   InboxOutlined, InfoOutlined,
   InsertPhotoOutlined,
@@ -9,7 +6,6 @@ import {
   TextSnippetOutlined,
 } from '@mui/icons-material';
 import { format } from 'date-fns';
-import type { ChangeEvent } from 'react';
 
 import Button from '@/components/base/Button';
 import Textarea from '@/components/base/Textarea';
@@ -19,7 +15,6 @@ import ChatBubble from '@/views/Message/components/ChatBubble/ChatBubble';
 import ChatEmpty from '@/views/Message/components/ChatEmpty/ChatEmpty';
 import useChatRoom from '@/views/Message/components/ChatRoom/ChatRoom.hooks';
 import type {
-  ChatMessage,
   ChatRoomProps,
 } from '@/views/Message/components/ChatRoom/ChatRoom.types';
 
@@ -30,44 +25,10 @@ const ChatRoom = (props: ChatRoomProps) => {
     isChatbot = false,
     status = '',
     date = '',
-    conversationId = '',
-    conversationMessage,
+    inputMessage,
+    handleInputMessage,
+    handleSendMessage,
   } = useChatRoom(props);
-
-  const [inputMessageType] = useState<number>(0);
-  const [inputMessage, setInputMessage] = useState<string>('');
-  const [connection] = useState<HubConnection>();
-
-  const handleInputMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const { target } = event;
-    const { value } = target;
-
-    setInputMessage(value);
-  };
-
-  const handleSendMessage = async () => {
-    const { conversation } = conversationMessage || {};
-    const { userId = '' } = conversation || {};
-
-    const messagePayload: ChatMessage = {
-      conversationId,
-      userId,
-      content: inputMessage,
-      messageType: inputMessageType,
-      fileUrl: '',
-    };
-
-    if (connection) {
-      connection
-        .invoke('SendMessage', messagePayload)
-        .then(() => {
-          setInputMessage('');
-        })
-        .catch((error) => {
-          console.error({ error });
-        });
-    }
-  };
 
   return (
     <div>
