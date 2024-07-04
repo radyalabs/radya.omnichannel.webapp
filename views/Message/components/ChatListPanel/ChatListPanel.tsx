@@ -67,6 +67,7 @@ const ChatListPanel = (props: ChatListPanelProps) => {
               onClick={() => onSelectConversation(data.conversationId)}
               variant={data.status}
               placeholder={data.lastMessage}
+              date={data.date}
             />
           ))
         }
