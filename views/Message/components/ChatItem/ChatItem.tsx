@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 import Chip from '@/components/base/Chip';
 import Typography from '@/components/base/Typography';
 import { IcCheckResolved } from '@/components/icons';
@@ -8,7 +10,11 @@ import type ChatItemProps from './ChatItem.types';
 
 const ChatItem = (props: ChatItemProps) => {
   const {
-    placeholder, name, variant = ChatItemType.Unserved, onClick,
+    placeholder,
+    name,
+    variant = ChatItemType.Unserved,
+    onClick,
+    date,
   } = props;
 
   return (
@@ -33,7 +39,7 @@ const ChatItem = (props: ChatItemProps) => {
       </div>
       <div className="flex flex-col justify-between items-center min-h-full">
         <Typography className="text-n-7" size="small">
-          Today 08.30
+          {`Today, ${format(new Date(date), 'HH:mm')}`}
         </Typography>
         { variant === ChatItemType.Served && (<Chip label="Served" variant="filled" color="primary" />)}
         { variant === ChatItemType.Unserved && (<Chip label="Unserved" variant="filled" color="error" />)}
