@@ -184,6 +184,7 @@ const useChatRoom = ({ conversationId }: ChatRoomProps) => {
               transport: HttpTransportType.WebSockets,
             })
             .configureLogging(LogLevel.Information)
+            .withAutomaticReconnect()
             .build();
           setConnection(conn);
 
