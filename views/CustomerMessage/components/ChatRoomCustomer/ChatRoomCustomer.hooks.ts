@@ -99,6 +99,7 @@ const useChatRoomCustomer = ({ userId }: ChatRoomCustomerProps) => {
               transport: HttpTransportType.WebSockets,
             })
             .configureLogging(LogLevel.Information)
+            .withAutomaticReconnect()
             .build();
           setConnection(conn);
 
